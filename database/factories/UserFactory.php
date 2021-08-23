@@ -28,6 +28,7 @@ class UserFactory extends Factory
         return [
             'name' => 'admin',
             'email' => 'admin@itindosolusi.com',
+            'accses' => 'admin',
             'email_verified_at' => now(),
             'password' => Hash::make('Amir00734'), // password
             'remember_token' => Str::random(10),
