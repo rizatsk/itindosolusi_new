@@ -18,16 +18,25 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 
+/*  
+Ketika Login sebagai admin larikan ke halaman adminItindosolution
+Jika Bukan , Larikan ke halaman dashboardItindosolution
+*/
+
 Route::group(['middleware' => 'auth:sanctum'],function(){
     Route::get('/dashboard',function(){ if (Auth::user()->accses === 'admin'){return view('dashboard');}
-                                        else{return view('error/404');}
+                                        else{return view('index');}
     })->name('dashboard');
     Route::get('/profile',function(){ if (Auth::user()->accses === 'admin'){return view('profile/show');}
-                                        else{return view('error/404');}
+                                        else{return view('index');}
     })->name('profile');
 });
 
 Route::get('/', function () {return view('welcome');})->name('home');
+
+// Itindosolution User
+Route::get('/portfolio-details', function () {return view('portfolio-details');})->name('portoflio-details');
+Route::get('/inner-page', function () {return view('inner-page');})->name('inner-page');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
