@@ -71,7 +71,16 @@
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+          <li class="dropdown"><a class="getstarted">Account<i class="bi bi-chevron-down"></i></a> 
+            <ul>
+              <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <li><a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                 this.closest('form').submit();">Logout</a></li>
+              </form>
+            </ul>
+          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

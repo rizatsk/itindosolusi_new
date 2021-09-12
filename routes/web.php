@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\pageAdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,25 +15,25 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 /*  
 Ketika Login sebagai admin larikan ke halaman adminItindosolution
 Jika Bukan , Larikan ke halaman dashboardItindosolution
 */
 
+// Function for loginPageAdmin
+function loginAdminController($page){
+    if (Auth::user()->accses === 'admin'){
+        return view($page);
+    }else{return view('index');};
+}
+
+// Login For Admin
 Route::group(['middleware' => 'auth:sanctum'],function(){
-    Route::get('/dashboard',function(){ if (Auth::user()->accses === 'admin'){return view('dashboard');}
-                                        else{return view('index');}
-    })->name('dashboard');
-    Route::get('/profile',function(){ if (Auth::user()->accses === 'admin'){return view('profile/show');}
-                                        else{return view('index');}
-    })->name('profile');
+    Route::get('/whoami', function(){ return loginAdminController('admin/indexAdmin');})->name('dashboard');
+    Route::get('/profile',function(){ return loginAdminController('profile/show');})->name('profile');
 });
 
-Route::get('/', function () {return view('welcome');})->name('home');
+Route::get('/', function () {return view('index');})->name('home');
 
 // Itindosolution User
 Route::get('/portfolio-details', function () {return view('portfolio-details');})->name('portoflio-details');
