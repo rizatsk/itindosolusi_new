@@ -8,6 +8,8 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@500&display=swap');
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -38,7 +40,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 0;
   z-index: 9999;
   overflow: hidden;
-  background: #37517e;
+  background: #141E61;
 }
 
 #preloader:before {
@@ -84,21 +86,21 @@ h1, h2, h3, h4, h5, h6 {
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: #47b2e4;
-  width: 40px;
-  height: 40px;
+  background: #0F044C;
+  width: 60px;
+  height: 60px;
   border-radius: 50px;
   transition: all 0.4s;
 }
 
 .back-to-top i {
-  font-size: 24px;
+  font-size: 50px;
   color: #fff;
   line-height: 0;
 }
 
 .back-to-top:hover {
-  background: #6bc1e9;
+  background: #141E61;
   color: #fff;
 }
 
@@ -114,11 +116,11 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.5s;
   z-index: 997;
   padding: 15px 0;
-  background: rgba(40, 58, 90, 0.9);
+  background: #0F044C;
 }
 
 #header.header-scrolled, #header.header-inner-pages {
-  background: rgba(40, 58, 90, 0.9);
+  background: #0f044cea;
 }
 
 #header .logo {
@@ -132,6 +134,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header .logo a {
+  font-family: 'Teko', sans-serif;
   color: #fff;
 }
 
@@ -372,7 +375,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero {
   width: 100%;
   height: 80vh;
-  background: #37517e;
+  background: #141E61;
 }
 
 #hero .container {
@@ -515,6 +518,7 @@ section {
 }
 
 .section-title h2 {
+  font-family: 'Teko', sans-serif;
   font-size: 32px;
   font-weight: bold;
   text-transform: uppercase;
@@ -553,16 +557,16 @@ section {
 /*--------------------------------------------------------------
 # Cliens
 --------------------------------------------------------------*/
-.cliens {
+/* .cliens {
   padding: 12px 0;
   text-align: center;
-}
+} */
 
 .cliens img {
-  max-width: 45%;
+  /* max-width: 40%; */
   transition: all 0.4s ease-in-out;
-  display: inline-block;
-  padding: 15px 0;
+  /* display: inline-block; */
+  padding: 10px 20px 0 0;
   filter: grayscale(100);
 }
 
@@ -571,11 +575,13 @@ section {
   transform: scale(1.1);
 }
 
-@media (max-width: 768px) {
-  .cliens img {
-    max-width: 40%;
-  }
+/* Tech Stock */
+.myskill-tech ul li{
+  list-style: none;
+  display: inline;
+  padding: 10px;
 }
+/* End Stack */
 
 /*--------------------------------------------------------------
 # About Us
@@ -606,6 +612,12 @@ section {
   font-size: 20px;
   color: #47b2e4;
   line-height: 1;
+}
+
+.about-span span{
+  color: #0F044C;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .about .content p:last-child {
@@ -735,6 +747,15 @@ section {
   display: none;
 }
 
+#accordion-list-1 ul li,
+#accordion-list-2 ul li,
+#accordion-list-3 ul li,
+#accordion-list-4 ul li{
+  padding: 0px;
+  margin: 10px 20px 0px 20px;
+  list-style: square;
+}
+  
 @media (max-width: 1024px) {
   .why-us .content, .why-us .accordion-list {
     padding-left: 0;
@@ -829,6 +850,7 @@ section {
 .services .icon-box {
   box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
   padding: 50px 30px;
+  margin-bottom: 20px;
   transition: all ease-in-out 0.4s;
   background: #fff;
 }
@@ -877,10 +899,11 @@ section {
   padding: 120px 0;
 }
 
-.cta h3 {
+.cta h1 {
+  font-family: "Teko";
   color: #fff;
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 38px;
+  /* font-weight: 700; */
 }
 
 .cta p {
@@ -1374,6 +1397,17 @@ section {
   display: none;
 }
 
+#faq-list-1 ul li,
+#faq-list-2 ul li,
+#faq-list-3 ul li,
+#faq-list-4 ul li,
+#faq-list-5 ul li,
+#faq-list-6 ul li
+{
+  list-style: inside;
+  padding: 10px 0 0 5px;
+}
+
 @media (max-width: 1200px) {
   .faq .faq-list {
     padding: 0;
@@ -1622,7 +1656,7 @@ section {
 --------------------------------------------------------------*/
 #footer {
   font-size: 14px;
-  background: #37517e;
+  background: #0F044C;
 }
 
 #footer .footer-newsletter {

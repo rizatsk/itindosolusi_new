@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title></title>
+  <title>@yield('title')</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('img/favicon.png')}}" rel="icon">
+  <link href="{{asset('img/logo.png')}}" rel="icon">
   <link href="{{asset('img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -42,37 +42,33 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">Arsha</a></h1>
+      <h1 class="logo me-auto"><img src="{{asset('img/logo.png')}}" alt="ItIndoSolution" width="50px"><a href="index.html">ItIndoSolution</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="/dashboard#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="/dashboard#abput">About</a></li>
-          <li><a class="nav-link scrollto" href="/dashboard#services">Services</a></li>
-          <li><a class="nav-link scrollto {{ request()->is('portfolio-details') ? ' active' : ''}}" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="/dashboard#team">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto" href="/#hero">Beranda</a></li>
+          <li><a class="nav-link scrollto" href="/#about">Tentang</a></li>
+          <li class="dropdown"><span>Pelayanan</span> <i class="bi bi-chevron-down"></i>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+              <li><a href="">Google Ads</a></li>
+              <li class="dropdown"><a href="">Jasa Pembuatan Website <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
+                  <li><a href="">Landing Page</a></li>
+                  <li><a href="">Company Profile</a></li>
+                  <li><a href="">Penjualan Online</a></li>
+                  <li><a href="">Custom WEB</a></li>
                 </ul>
               </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="/dashboard#contact">Contact</a></li>
-          <li class="dropdown"><a class="getstarted" href="#">Get Started<i class="bi bi-chevron-down"></a></i>
+          {{-- <li><a class="nav-link scrollto {{ request()->is('portfolio-details') ? ' active' : ''}}" href="#portfolio">Portfolio</a></li > --}}
+          <li><a class="nav-link scrollto" href="/#contact">Kontak</a></li>
+          <li class="dropdown"><a class="getstarted" href="#">Account<i class="bi bi-chevron-down"></a></i>
+            @if (Route::has('login'))
             <ul>
+              @auth
               {{-- Button LogOut --}}
               <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -80,7 +76,12 @@
                   onclick="event.preventDefault();
                    this.closest('form').submit();">Logout</a></li>
               </form>
+            @else 
+            <li><a href="{{route('login')}}">Login</a></li>
+            <li><a href="{{route('register')}}">Register</a></li>
               {{-- End Button --}}
+              @endauth
+            @endif
             </ul>
           </li>
         </ul>

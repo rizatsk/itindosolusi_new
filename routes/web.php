@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\kirimPesan;
 use App\Http\Controllers\pageAdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,8 @@ function loginAdminController($page){
 
 // Login For Admin
 Route::group(['middleware' => 'auth:sanctum'],function(){
-    Route::get('/whoami', function(){ return loginAdminController('admin/indexAdmin');})->name('dashboard');
+    Route::get('/dashboard', function(){ return loginAdminController('admin/dashboard-admin');})->name('dashboard');
+    // Route::get('/admin-forms', function(){ return loginAdminController('admin/formsAdmin');})->name('formsAdmin');
     Route::get('/profile',function(){ return loginAdminController('profile/show');})->name('profile');
 });
 
