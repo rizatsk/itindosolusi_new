@@ -1,0 +1,20 @@
+#hero-form
+{
+    width: 100%;
+    background: #141E61;
+}
+
+#hero-form .container{
+    padding-top: 72px;
+}
+
+.form-right
+{
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    max-width: 450px;
+}
+.form-control
+{
+    max-width: 450px;
+}

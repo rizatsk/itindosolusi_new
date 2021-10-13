@@ -1,12 +1,13 @@
 <x-jet-form-section submit="updateProfileInformation">
-    <x-slot name="title">
+
+  <x-slot name="title">
         {{ __('Profile Information') }}
     </x-slot>
 
     <x-slot name="description">
         {{ __('Update your account\'s profile information and email address.') }}
     </x-slot>
-
+    
     <x-slot name="form">
         <!-- Profile Photo -->
         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -24,7 +25,7 @@
                                     reader.readAsDataURL($refs.photo.files[0]);
                             " />
 
-                <x-jet-label for="photo" value="{{ __('Photo') }}" />
+                <x-jet-label id="jet-label" for="photo" value="{{ __('Photo') }}" />
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
@@ -52,28 +53,88 @@
             </div>
         @endif
 
+        <!-- Username -->
+        <div class="col-span-6 row sm:col-span-4">
+          <div class="col-4">
+            <x-jet-label id="jet-label" for="username" value="{{ __('Username') }}" />
+          </div>
+          <div class="col-sm-8">
+            <p>{{$this->user->username}}</p>
+          </div>
+        </div>
+
         <!-- Name -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="name" value="{{ __('Name') }}" />
-            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
+        <div class="col-span-6 row align-items-center sm:col-span-4">
+          <div class="col-4">
+            <x-jet-label id="jet-label" for="name" value="{{ __('Name') }}" />
+          </div>
+          <div class="col-sm-8">
+            <x-jet-input id="name" type="text" class="block w-full" wire:model.defer="state.name" autocomplete="name" />
             <x-jet-input-error for="name" class="mt-2" />
+          </div>
         </div>
 
         <!-- Email -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="email" value="{{ __('Email') }}" />
-            <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
-            <x-jet-input-error for="email" class="mt-2" />
+        <div class="col-span-6 row sm:col-span-4">
+          <div class="col-4">
+            <x-jet-label id="jet-label" for="email" value="{{ __('Email') }}" />
+          </div>
+          <div class="col-sm-8">
+            <p>{{$this->user->email}}</p>
+          </div>
         </div>
+
+        <!-- No-Handphone -->
+        <div class="col-span-6 row sm:col-span-4">
+          <div class="col-4">
+            <x-jet-label id="jet-label" for="no_handphone" value="{{ __('No.Handphone') }}" />
+          </div>
+          <div class="col-sm-8">
+            <p>{{$this->user->no_handphone}}</p>
+          </div>
+        </div>
+
+        {{-- Jenis Kelamin --}}
+        <div class="col-span-6 row align-items-center sm:col-span-4">
+          <div class="col-4">
+            <x-jet-label id="jet-label" for="jenis-kelamin" value="{{ __('Jenis Kelamin') }}" />
+          </div>
+          <div class="col-sm-8">
+            <div class="form-check-inline">
+              <input class="form-check-input" type="radio" name="jenisKelamin" wire:model.defer="state.jenisKelamin" id="Laki-laki" value="Laki-laki" {{$this->user->jenisKelamin === "Laki-laki" ? 'checked' : ''}}>
+              <label class="form-check-label" for="Laki-laki">
+                Laki-laki
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <input class="form-check-input" type="radio" name="jenisKelamin" wire:model.defer="state.jenisKelamin" id="perempuan" value="Perempuan" {{$this->user->jenisKelamin === "Perempuan" ? 'checked' : ''}}>
+              <label class="form-check-label" for="Perempuan">
+                Perempuan
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tanggal Lahir -->
+        <div class="col-span-6 row align-items-center sm:col-span-4">
+          <div class="col-4">
+            <x-jet-label id="jet-label" for="tanggalLahir" value="{{ __('Tanggal Lahir') }}" />
+          </div>
+          <div class="col-sm-8">
+            <input type="date" name="tanggalLahir" id="tanggalLahir" class="mt-1 block w-full" wire:model.defer="state.tanggalLahir" autocomplete="tanggalLahir">
+            <x-jet-input-error for="tanggalLahir" class="mt-2" />
+          </div>
+        </div>
+
     </x-slot>
 
     <x-slot name="actions">
-        <x-jet-action-message class="mr-3" on="saved">
+        <x-jet-action-message class="mr-4" on="saved">
             {{ __('Saved.') }}
         </x-jet-action-message>
-
-        <x-jet-button wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Save') }}
-        </x-jet-button>
+        
+        <button class="btn btn-primary ps-4 pe-4" wire:loading.attr="disabled" wire:target="photo">
+          {{ __('Save') }}
+        </button>
     </x-slot>
 </x-jet-form-section>

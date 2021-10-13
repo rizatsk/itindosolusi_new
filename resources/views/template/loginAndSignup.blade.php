@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>@yield('title')</title>
+  <title>{{ request()->is('login')  ? 'Login' : 'SignUp'}} | ITINDOSOLUTION</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Favicons -->
   <link href="{{asset('img/logo.png')}}" rel="icon">
@@ -15,9 +16,6 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  {{-- Tailwind Jetstream --}}
-  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
   <!-- Vendor CSS Files -->
   <link href="{{asset('vendor/aos/aos.css')}}" rel="stylesheet">
@@ -27,21 +25,11 @@
   <link href="{{asset('vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
-
+  
   <!-- Template Main CSS File -->
   <link href="{{asset('css/style.css')}}" rel="stylesheet">
-  <link rel="stylesheet" href="{{asset('css/user-profile.css')}}">
+  <link href="{{asset('css/loginStyle.css')}}" rel="stylesheet">
 
-  <!-- Scripts -->
-  <script src="{{ mix('js/app.js') }}" defer></script>  
-  @livewireStyles
-
-  <!-- =======================================================
-  * Template Name: Arsha - v4.3.0
-  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -50,47 +38,25 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><img src="{{asset('img/logo.png')}}" alt="ItIndoSolution" width="40px" class="d-inline"><a href="/">ItIndoSolution</a></h1>
+      <h1 class="logo me-auto"><img src="{{asset('img/logo.png')}}" alt="ItIndoSolution" width="50px"><a href="/">ItIndoSolution</a></h1>
+      <h5 class="me-auto text-white" id="header-login-signup">{{ request()->is('login') ? 'Login' : 'SignUp'}}</h5>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="/#hero">Beranda</a></li>
-          <li><a class="nav-link scrollto" href="/#about">Tentang</a></li>
-          <li class="dropdown"><a class="nav-link" href="/#services"><span>Pelayanan</span><i class="bi bi-chevron-down"></a></i>
+          <li class="dropdown"><a class="getstarted" href="#">Akun<i class="bi bi-chevron-down"></a></i>
+            @if (Route::has('login'))
             <ul>
-              <li><a href="">Google Ads</a></li>
-              <li class="dropdown"><a href="">Jasa Pembuatan Website <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="">Landing Page</a></li>
-                  <li><a href="">Company Profile</a></li>
-                  <li><a href="">Penjualan Online</a></li>
-                  <li><a href="">Custom WEB</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a class="nav-link scrollto" href="#faq">FAQ</a></li>
-          {{-- <li><a class="nav-link scrollto {{ request()->is('portfolio-details') ? ' active' : ''}}" href="#portfolio">Portfolio</a></li > --}}
-          <li><a class="nav-link scrollto" href="/#contact">Kontak</a></li>
-          @if (Route::has('login'))
-          <li class="dropdown"><a class="getstarted" href="#">{{Auth::user()->username}}<i class="bi bi-chevron-down"></a></i>
-          <ul>
               @auth
               {{-- Button LogOut --}}
-              <li> <a href="{{route('profile.show')}}">Profile</a> </li>
               <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <li>
-                  <a href="{{ route('logout') }}"
+                <li><a href="{{ route('logout') }}"
                   onclick="event.preventDefault();
-                   this.closest('form').submit();">Log out</a>
-                </li>
+                   this.closest('form').submit();">Logo ut</a></li>
               </form>
             @else 
-            <li class="dropdown"><a class="getstarted" href="#">Akun<i class="bi bi-chevron-down"></a></i>
             <li><a href="{{route('login')}}">Log in</a></li>
             <li><a href="{{route('register')}}">Daftar</a></li>
               {{-- End Button --}}
@@ -103,10 +69,19 @@
       </nav><!-- .navbar -->
 
     </div>
-  </header><!-- End Header -->
-
+  </header>
+  <!-- End Header -->
+  
   <!-- ======= Hero Section ======= -->
+  {{-- Logo alert --}}
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </symbol>
+  </svg>
   @yield('content')
+  <!-- ======= End Hero Section ======= -->
+
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -185,12 +160,6 @@
   <!-- Template Main JS File -->
   <script src="{{asset('js/main.js')}}"></script>
 
-  {{-- Jquery --}}
-  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
-  {{-- show profile --}}
-  <script src="{{asset('js/showProfile.js')}}"></script>
-  @livewireScripts
 </body>
 
 </html>

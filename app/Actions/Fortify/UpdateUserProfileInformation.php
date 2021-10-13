@@ -16,12 +16,15 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      * @param  array  $input
      * @return void
      */
+
     public function update($user, array $input)
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
+            'jenisKelamin' => ['nullable', 'string', 'max:10'],
+            'tanggalLahir' => ['nullable', 'date'],
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
@@ -35,6 +38,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->forceFill([
                 'name' => $input['name'],
                 'email' => $input['email'],
+                'jenisKelamin' => $input['jenisKelamin'],
+                'tanggalLahir' => $input['tanggalLahir'],
             ])->save();
         }
     }
@@ -52,6 +57,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'name' => $input['name'],
             'email' => $input['email'],
             'email_verified_at' => null,
+            'jenisKelamin' => $input['jenisKelamin'],
+            'tanggalLahir' => $input['tanggalLahir'],
         ])->save();
 
         $user->sendEmailVerificationNotification();

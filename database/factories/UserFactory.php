@@ -27,7 +27,11 @@ class UserFactory extends Factory
     {
         return [
             'name' => 'admin',
+            'username' => 'admin',
             'email' => 'admin@itindosolusi.com',
+            'no_handphone' => '087782987067',
+            'jenisKelamin' => 'Laki-laki',
+            'tanggalLahir' => '20000224',
             'accses' => 'admin',
             'email_verified_at' => now(),
             'password' => Hash::make('Amir00734'), // password

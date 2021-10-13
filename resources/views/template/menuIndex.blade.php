@@ -36,7 +36,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><img src="{{asset('img/logo.png')}}" alt="ItIndoSolution" max-width="50px"><a href="index.html"> ItIndoSolution</a></h1>
+      <h1 class="logo me-auto"><img src="{{asset('img/logo.png')}}" alt="ItIndoSolution" max-width="40px"><a href="/"> ItIndoSolution</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -58,12 +58,13 @@
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a class="nav-link scrollto" href="#faq">Panduan</a></li>
+          <li><a class="nav-link scrollto" href="#faq">FAQ</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
-          <li class="dropdown"><a class="getstarted">Account<i class="bi bi-chevron-down"></i></a> 
-            @if (Route::has('login'))
+          @if (Route::has('login'))
+          @auth
+          <li class="dropdown"><a class="getstarted">{{Auth::user()->username}}<i class="bi bi-chevron-down"></i></a> 
             <ul>
-              @auth
+              <li><a href="{{route('profile.show')}}">Profile</a></li>
               {{-- Button LogOut --}}
               <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -71,13 +72,16 @@
                   onclick="event.preventDefault();
                    this.closest('form').submit();">Logout</a></li>
               </form>
+            </ul>
             @else 
-            <li><a href="{{route('login')}}">Login</a></li>
-            <li><a href="{{route('register')}}">Register</a></li>
+            <li class="dropdown"><a class="getstarted">Akun<i class="bi bi-chevron-down"></i></a> 
+              <ul>
+                <li><a href="{{route('login')}}">Log in</a></li>
+                <li><a href="{{route('register')}}">Daftar</a></li>
               {{-- End Button --}}
               @endauth
             @endif
-            </ul>
+              </ul>
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -108,13 +112,13 @@
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Link</h4>
+            <h4>Jelajahi ITINDOSOLUTION</h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="#hero">Beranda</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#about">Tentang</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#services">Pelayanan</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#team">Team</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#faq">Panduan</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#faq">FAQ</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#contact">Kontak</a></li>
             </ul>
           </div>
@@ -129,7 +133,7 @@
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Social Media</h4>
-            <p>Kunjungi social media kita.</p>
+            <p>Ikuti social media kami.</p>
             <div class="social-links mt-3">
               <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
               <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -146,7 +150,7 @@
         &copy; Copyright <strong><span>ITINDOSOLUTION</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        Developer as team <a href="https://bootstrapmade.com/">ITINDOSOLUTION</a>
+        Developer as team <a href="#hero">ITINDOSOLUTION</a>
       </div>
     </div>
   </footer><!-- End Footer -->
@@ -168,6 +172,7 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('js/main.js')}}"></script>
+  <script src="{{asset('js/sendMessage.js')}}"></script>
   @livewireScripts
 
 </body>
